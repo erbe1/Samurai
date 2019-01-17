@@ -4,14 +4,16 @@ using EfSamurai.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfSamurai.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20190117144632_12")]
+    partial class _12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,7 @@ namespace EfSamurai.Data.Migrations
 
             modelBuilder.Entity("EfSamurai.Domain.Battle", b =>
                 {
-                    b.Property<int>("BattleId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,7 +37,7 @@ namespace EfSamurai.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.HasKey("BattleId");
+                    b.HasKey("Id");
 
                     b.ToTable("Battles");
                 });
@@ -67,6 +69,8 @@ namespace EfSamurai.Data.Migrations
 
                     b.Property<int>("Age");
 
+                    b.Property<int?>("BattleId");
+
                     b.Property<string>("Clan");
 
                     b.Property<int>("Haircut");
@@ -77,20 +81,9 @@ namespace EfSamurai.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Samurais");
-                });
-
-            modelBuilder.Entity("EfSamurai.Domain.SamuraiBattle", b =>
-                {
-                    b.Property<int>("SamuraiId");
-
-                    b.Property<int>("BattleId");
-
-                    b.HasKey("SamuraiId", "BattleId");
-
                     b.HasIndex("BattleId");
 
-                    b.ToTable("SamuraiBattle");
+                    b.ToTable("Samurais");
                 });
 
             modelBuilder.Entity("EfSamurai.Domain.SecretIdentity", b =>
@@ -118,17 +111,11 @@ namespace EfSamurai.Data.Migrations
                         .HasForeignKey("SamuraiId");
                 });
 
-            modelBuilder.Entity("EfSamurai.Domain.SamuraiBattle", b =>
+            modelBuilder.Entity("EfSamurai.Domain.Samurai", b =>
                 {
                     b.HasOne("EfSamurai.Domain.Battle", "Battle")
-                        .WithMany("SamuraiBattles")
-                        .HasForeignKey("BattleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EfSamurai.Domain.Samurai", "Samurai")
-                        .WithMany("SamuraiBattles")
-                        .HasForeignKey("SamuraiId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("samurais")
+                        .HasForeignKey("BattleId");
                 });
 
             modelBuilder.Entity("EfSamurai.Domain.SecretIdentity", b =>

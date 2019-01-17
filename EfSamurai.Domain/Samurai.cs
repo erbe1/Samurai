@@ -14,9 +14,10 @@ namespace EfSamurai.Domain
         public Haircut Haircut { get; set; }
         public QuoteVariation QuoteVariation { get; set; }
 
-
-        public List<Quote> Quote { get; set; }
+        public List<Quote> Quote { get; set; }        
 
         public SecretIdentity SecretIdentity { get; set; }
+
+        public List<SamuraiBattle> SamuraiBattles { get; set; }
     }
 }
