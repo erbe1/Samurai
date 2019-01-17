@@ -4,14 +4,16 @@ using EfSamurai.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfSamurai.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20190117133029_MyFirstMigration6")]
+    partial class MyFirstMigration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace EfSamurai.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("QuoteScream");
-
-                    b.Property<string>("QuoteType");
 
                     b.Property<int?>("SamuraiId");
 
@@ -58,7 +58,7 @@ namespace EfSamurai.Data.Migrations
             modelBuilder.Entity("EfSamurai.Domain.Quote", b =>
                 {
                     b.HasOne("EfSamurai.Domain.Samurai", "Samurai")
-                        .WithMany("Quote")
+                        .WithMany()
                         .HasForeignKey("SamuraiId");
                 });
 #pragma warning restore 612, 618

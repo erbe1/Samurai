@@ -4,14 +4,16 @@ using EfSamurai.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfSamurai.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20190117133529_MyFirstMigration8")]
+    partial class MyFirstMigration8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,11 +31,7 @@ namespace EfSamurai.Data.Migrations
 
                     b.Property<string>("QuoteType");
 
-                    b.Property<int?>("SamuraiId");
-
                     b.HasKey("QuoteId");
-
-                    b.HasIndex("SamuraiId");
 
                     b.ToTable("Quotes");
                 });
@@ -50,16 +48,20 @@ namespace EfSamurai.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("QuoteId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuoteId");
 
                     b.ToTable("Samurais");
                 });
 
-            modelBuilder.Entity("EfSamurai.Domain.Quote", b =>
+            modelBuilder.Entity("EfSamurai.Domain.Samurai", b =>
                 {
-                    b.HasOne("EfSamurai.Domain.Samurai", "Samurai")
-                        .WithMany("Quote")
-                        .HasForeignKey("SamuraiId");
+                    b.HasOne("EfSamurai.Domain.Quote", "Quote")
+                        .WithMany()
+                        .HasForeignKey("QuoteId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EfSamurai.Domain
 {
@@ -8,5 +9,7 @@ namespace EfSamurai.Domain
         public string Name { get; set; }
         public string Clan { get; set; }
         public int Age { get; set; }
+
+        public List<Quote> Quote { get; set; }
     }
 }

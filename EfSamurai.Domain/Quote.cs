@@ -8,6 +8,10 @@ namespace EfSamurai.Domain
 {
     public class Quote
     {
-        
+        public int QuoteId { get; set; }
+        public string QuoteScream { get; set; }
+        public string QuoteType { get; set; }
+
+        public Samurai Samurai { get; set; }
     }
 }
