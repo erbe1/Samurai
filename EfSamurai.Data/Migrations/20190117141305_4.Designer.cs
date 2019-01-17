@@ -4,41 +4,22 @@ using EfSamurai.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfSamurai.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20190117141305_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EfSamurai.Domain.Battle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("BattleEnd");
-
-                    b.Property<DateTime>("BattleStart");
-
-                    b.Property<bool>("Brutal");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Battles");
-                });
 
             modelBuilder.Entity("EfSamurai.Domain.Quote", b =>
                 {
@@ -73,29 +54,9 @@ namespace EfSamurai.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("QuoteVariation");
-
                     b.HasKey("Id");
 
                     b.ToTable("Samurais");
-                });
-
-            modelBuilder.Entity("EfSamurai.Domain.SecretIdentity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("SamuraiId");
-
-                    b.Property<string>("SecreteName");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SamuraiId")
-                        .IsUnique();
-
-                    b.ToTable("SecretIdentities");
                 });
 
             modelBuilder.Entity("EfSamurai.Domain.Quote", b =>
@@ -103,14 +64,6 @@ namespace EfSamurai.Data.Migrations
                     b.HasOne("EfSamurai.Domain.Samurai", "Samurai")
                         .WithMany("Quote")
                         .HasForeignKey("SamuraiId");
-                });
-
-            modelBuilder.Entity("EfSamurai.Domain.SecretIdentity", b =>
-                {
-                    b.HasOne("EfSamurai.Domain.Samurai", "Samurai")
-                        .WithOne("SecretIdentity")
-                        .HasForeignKey("EfSamurai.Domain.SecretIdentity", "SamuraiId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
